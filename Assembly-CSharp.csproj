@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C1BF62FA-C5C9-41A2-2CDF-B0DCBC002D60}</ProjectGuid>
+    <ProjectGuid>{C50B406A-7147-28E1-7369-D0F364CD8AE9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,6 +63,7 @@
     <Compile Include="Assets\Script\Manager\UIManager.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\Manager\SpawnManager.cs" />
+    <Compile Include="Assets\Script\Manager\VersatileButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Unity UI Samples\Textures and Sprites\SF UI\Background\LICENSE.txt" />

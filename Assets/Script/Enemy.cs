@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         enemySprite = GetComponent<SpriteRenderer>();
-
         enemyMaterial = enemySprite.material;
 
         flash = new Material(flash);
@@ -33,7 +32,7 @@ public class Enemy : MonoBehaviour
             // effect가 활성화되어 파티클이 보이도록 설정합니다.
             effect.gameObject.SetActive(true);
 
-            // Enemy 오브젝트가 0.5초 뒤에 파괴됩니다.
+            // Enemy 오브젝트가 0.25초 뒤에 파괴됩니다.
             Destroy(gameObject, 0.25f);
         }
     }
@@ -60,18 +59,11 @@ public class Enemy : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.instance.score += 100;
-        
+
         // 게임 데이터를 저장합니다.
         GameManager.instance.Save();
 
         SoundManager.instance.SoundStart(1);
-
-        Instantiate
-        (
-            Resources.Load<GameObject>("Explosion"), // 생성하고 싶은 게임 오브젝트
-            transform.position, // 생성되는 게임 오브젝트의 위치
-            Quaternion.identity // Quaternion.identity 회전을 하지 않겠다는 의미입니다.
-        );
     }
 
     private IEnumerator Damage()

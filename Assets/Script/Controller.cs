@@ -5,6 +5,7 @@ public class Controller : MonoBehaviour
 {
     [SerializeField] float speed = 1.0f;
     [SerializeField] Transform centerMuzzle;
+    [SerializeField] GameObject pet;
     
     // 메모리 풀로 사용할 게임 오브젝트
     [SerializeField] Bullet lazerPrefab;
@@ -20,12 +21,15 @@ public class Controller : MonoBehaviour
         // 4. 게임 오브젝트를 파괴하는 함수
         // 5. maxSize 메모리에 저장하고 싶은 갯수
         
-        lazerPool = new ObjectPool<Bullet>(LazerCreate, LazerGet, ReleaseLazer, DestroyLazer, maxSize : 20); 
+        lazerPool = new ObjectPool<Bullet>
+       (
+          LazerCreate, LazerGet, ReleaseLazer, DestroyLazer, maxSize : 20
+       ); 
     }
 
     void Start()
     { 
-        InvokeRepeating(nameof(InfiniteLazer), 0, 0.025f);
+        InvokeRepeating(nameof(InfiniteLazer), 0, 0.1f);
     }
 
     public void InfiniteLazer()
@@ -39,10 +43,19 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        
+        // GameManager에 있는 state 변수가 false라면 함수를 return(종료)를 시킵니다.
+        if (GameManager.instance.state == false) return;
+
+        // GameManager.insance.dragon의 값이 0이면 펫을 아직 구매하지 않은 상태입니다.
+        // GameManager.insance.dragon의 값이 1이면 펫을 아직 구매한 상태입니다.
+        if (GameManager.instance.dragon >= 1)
+        {
+            pet.SetActive(true);
+        }
+
         float x = Input.GetAxis("Mouse X");
 
-        Vector3 direction = new Vector3(x, 0, 0);
+        Vector3 direction = new Vector3( x, 0, 0);
 
         transform.Translate(direction.normalized * speed * Time.deltaTime);
 
